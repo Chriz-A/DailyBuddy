@@ -46,6 +46,19 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.kalenderansicht_abrufen) {
+            return true;
+        }
+        if (id == R.id.notizfunktion_aufrufen) {
+            return true;
+        }
+        if (id == R.id.wetterinformationen_abrufen) {
+            return true;
+        }
+        if (id == R.id.rechnerfunktion_aufrufen) {
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
     }

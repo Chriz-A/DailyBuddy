@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">DailyBuddy</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="kalenderansicht_abrufen">Kalender</string>
+    <string name="wetterinformationen_abrufen">Wetter</string>
+    <string name="rechnerfunktion_aufrufen">Rechner</string>
+    <string name="notizfunktion_aufrufen">Notizen</string>
 </resources>
