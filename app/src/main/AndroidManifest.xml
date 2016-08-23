@@ -18,6 +18,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Kalender"
+            android:label="Kalender">
+        </activity>
+        <activity
+            android:name=".Notizen"
+            android:label="Notizen">
+        </activity>
+        <activity
+            android:name=".Wetter"
+            android:label="Wetter">
+        </activity>
+        <activity
+            android:name=".Rechner"
+            android:label="Rechner">
+        </activity>
     </application>
 
 </manifest>

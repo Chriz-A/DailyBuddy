@@ -7,4 +7,26 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/kalenderansicht_abrufen"
+        android:orderInCategory="100"
+        android:title="@string/kalenderansicht_abrufen"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/notizfunktion_aufrufen"
+        android:orderInCategory="100"
+        android:title="@string/notizfunktion_aufrufen"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/wetterinformationen_abrufen"
+        android:orderInCategory="100"
+        android:title="@string/wetterinformationen_abrufen"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/rechnerfunktion_aufrufen"
+        android:orderInCategory="100"
+        android:title="@string/rechnerfunktion_aufrufen"
+        app:showAsAction="never" />
+
+
 </menu>
