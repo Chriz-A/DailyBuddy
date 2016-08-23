@@ -9,8 +9,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Button dateButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +21,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        dateButton = (Button) findViewById(R.id.button_date);
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(MainActivity.this, Kalender.class);
+                startActivity(i);
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -47,18 +58,29 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.home) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
         if (id == R.id.kalenderansicht_abrufen) {
             Intent i = new Intent(this, Kalender.class);
             startActivity(i);
             return true;
         }
         if (id == R.id.notizfunktion_aufrufen) {
+            Intent i = new Intent(this, Notizen.class);
+            startActivity(i);
             return true;
         }
         if (id == R.id.wetterinformationen_abrufen) {
+            Intent i = new Intent(this, Wetter.class);
+            startActivity(i);
             return true;
         }
         if (id == R.id.rechnerfunktion_aufrufen) {
+            Intent i = new Intent(this, Rechner.class);
+            startActivity(i);
             return true;
         }
 

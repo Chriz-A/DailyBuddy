@@ -14,12 +14,12 @@
     tools:context="de.ur.mi.android.dailybuddy.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Datum"
         android:gravity="center"
-        android:id="@+id/textView"
+        android:id="@+id/button_date"
         android:textColor="#ffffff"
         android:layout_weight="0.1"
         android:textSize="20sp"

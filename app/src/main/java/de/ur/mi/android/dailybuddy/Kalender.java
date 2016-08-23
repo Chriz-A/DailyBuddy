@@ -42,16 +42,29 @@ public class Kalender extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.home) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            return true;
+        }
         if (id == R.id.kalenderansicht_abrufen) {
-
+            Intent i = new Intent(this, Kalender.class);
+            startActivity(i);
+            return true;
         }
         if (id == R.id.notizfunktion_aufrufen) {
+            Intent i = new Intent(this, Notizen.class);
+            startActivity(i);
             return true;
         }
         if (id == R.id.wetterinformationen_abrufen) {
+            Intent i = new Intent(this, Wetter.class);
+            startActivity(i);
             return true;
         }
         if (id == R.id.rechnerfunktion_aufrufen) {
+            Intent i = new Intent(this, Rechner.class);
+            startActivity(i);
             return true;
         }
 

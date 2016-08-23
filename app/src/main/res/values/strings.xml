@@ -5,4 +5,5 @@
     <string name="wetterinformationen_abrufen">Wetter</string>
     <string name="rechnerfunktion_aufrufen">Rechner</string>
     <string name="notizfunktion_aufrufen">Notizen</string>
+    <string name="home">Home</string>
 </resources>
