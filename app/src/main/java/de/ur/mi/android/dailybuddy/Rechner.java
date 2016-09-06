@@ -6,16 +6,169 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Created by Chris on 23.08.2016.
  */
 public class Rechner extends AppCompatActivity {
 
+    private TextView output;
+
+    private Button button_0;
+    private Button button_1;
+    private Button button_2;
+    private Button button_3;
+    private Button button_4;
+    private Button button_5;
+    private Button button_6;
+    private Button button_7;
+    private Button button_8;
+    private Button button_9;
+
+    private Button button_divided;
+    private Button button_multiplied;
+    private Button button_minus;
+    private Button button_plus;
+    private Button button_equals;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rechner);
+        output = (TextView) findViewById(R.id.output);
+        setButtons();
+        clickButtons();
+
+
+    }
+
+    private void clickButtons() {
+        button_0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+               output.setText(output.getText()+"0");
+            }
+        });
+        button_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.setText(output.getText()+"1");
+            }
+        });
+        button_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.setText(output.getText()+"2");
+            }
+        });
+        button_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.setText(output.getText()+"3");
+            }
+        });
+        button_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.setText(output.getText()+"4");
+            }
+        });
+        button_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.setText(output.getText()+"5");
+            }
+        });
+        button_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.setText(output.getText()+"6");
+            }
+        });
+        button_7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.setText(output.getText()+"7");
+            }
+        });
+        button_8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.setText(output.getText()+"8");
+            }
+        });
+        button_9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.setText(output.getText()+"9");
+            }
+        });
+        button_divided.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.setText(output.getText()+"/");
+            }
+        });
+        button_multiplied.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.setText(output.getText()+"x");
+            }
+        });
+        button_minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.setText(output.getText()+"-");
+            }
+        });
+        button_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.setText(output.getText()+"+");
+            }
+        });
+        button_equals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                calculate(output);
+                output.setText("0");
+            }
+        });
+    }
+
+    private void calculate(TextView output) {
+        String calculator = output.toString();
+        for (int i = 0; i < calculator.length(); i++ ) {
+            if (calculator.charAt(i) == '/'){
+                double result = calculator.charAt(i-1)/calculator.charAt(i+1);
+
+            } else if(calculator.charAt(i) == 'x'){
+
+            }
+        }
+    }
+
+    private void setButtons() {
+        button_0 = (Button) findViewById(R.id.button_0);
+        button_1 = (Button) findViewById(R.id.button_1);
+        button_2 = (Button) findViewById(R.id.button_2);
+        button_3 = (Button) findViewById(R.id.button_3);
+        button_4 = (Button) findViewById(R.id.button_4);
+        button_5 = (Button) findViewById(R.id.button_5);
+        button_6 = (Button) findViewById(R.id.button_6);
+        button_7 = (Button) findViewById(R.id.button_7);
+        button_8 = (Button) findViewById(R.id.button_8);
+        button_9 = (Button) findViewById(R.id.button_9);
+
+        button_divided = (Button) findViewById(R.id.button_divided);
+        button_multiplied = (Button) findViewById(R.id.button_multiplied);
+        button_minus = (Button) findViewById(R.id.button_minus);
+        button_plus = (Button) findViewById(R.id.button_plus);
+        button_equals = (Button) findViewById(R.id.button_equals);
+
 
 
     }

@@ -8,7 +8,8 @@
         android:layout_height="0dp"
         android:layout_weight="0.4"
         android:text="Notizen"
-        android:gravity="center"/>
+        android:gravity="center"
+        />
 
 
 </LinearLayout>
