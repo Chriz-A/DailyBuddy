@@ -5,8 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBar;
+
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +21,9 @@ public class Kalender extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.kalender);
+        ActionBar ab = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#ff0000"));
+        ab.setBackgroundDrawable(colorDrawable);
 
 
     }
