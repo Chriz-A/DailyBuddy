@@ -9,11 +9,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 import android.widget.Button;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button dateButton;
+    private int day;
+    private int month;
+    private int year;
+    private WebView quoteOfTheDay;
+    private WebView picOfTheDay;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setDate();
+        setQuoteOfTheDay();
+        setPicOfTheDay();
         dateButton = (Button) findViewById(R.id.button_date);
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,14 +43,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+    }
+
+    private void setPicOfTheDay() {
+        picOfTheDay = (WebView) findViewById(R.id.pic_of_the_day);
+        picOfTheDay.loadUrl("file:///android_asset/dailypicture.html");
+    }
+
+    private void setQuoteOfTheDay() {
+        quoteOfTheDay = (WebView) findViewById(R.id.quote_of_the_day);
+        quoteOfTheDay.loadUrl("https://taeglicheszit.at/zitat-api.php?format=full");
+    }
+
+    private void setDate() {
+        dateButton = (Button) findViewById(R.id.button_date);
+        final Calendar cal = Calendar.getInstance();
+        day = cal.get(Calendar.DAY_OF_MONTH);
+        month = cal.get(Calendar.MONTH);
+        year = cal.get(Calendar.YEAR);
+// set current date into textview
+        dateButton.setText(new StringBuilder()
+// Month is 0 based, just add 1
+                .append(day).append(" ").append("-").append(month + 1).append("-")
+                .append(year));
     }
 
     @Override
