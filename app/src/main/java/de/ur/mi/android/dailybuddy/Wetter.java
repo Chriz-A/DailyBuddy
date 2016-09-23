@@ -9,11 +9,22 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * Created by Chris on 23.08.2016.
  */
 public class Wetter extends AppCompatActivity {
+
+    private ArrayList<WetterInfo> wetterInfos;
+
+    private TextView city;
+    private TextView temperature;
+    private final static String ADDRESS = "http://api.openweathermap.org/data/2.5/weather?q=regensburg&APPID=107470e295d6b8a56c3d6100ea1a28a4";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +32,13 @@ public class Wetter extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#ffa500"));
         ab.setBackgroundDrawable(colorDrawable);
-
+        wetterInfos = new ArrayList<WetterInfo>();
+        city = (TextView) findViewById(R.id.city);
+        temperature = (TextView) findViewById(R.id.temperature);
+        WetterInfo p = wetterInfos.get(0);
+        city.setText(p.getCity());
+        temperature.setText(p.getTemperature());
+        new WetterTask(wetterInfos).execute(ADDRESS);
     }
 
     @Override

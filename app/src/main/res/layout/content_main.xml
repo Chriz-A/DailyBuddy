@@ -13,6 +13,8 @@
     tools:context="de.ur.mi.android.dailybuddy.MainActivity"
     tools:showIn="@layout/activity_main">
 
+
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +24,8 @@
         android:textColor="#ffffff"
         android:layout_weight="0.1"
         android:textSize="20sp"
-        android:background="#000000"
+        android:background="@drawable/background_color_gradient"
+        android:layout_marginTop="1dp"
         />
 
     <TextView
@@ -43,6 +46,14 @@
         android:text="Spruch des Tages"
         android:gravity="center"
         android:id="@+id/quote_of_the_day"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+       />
 
     <TextView
         android:layout_width="match_parent"

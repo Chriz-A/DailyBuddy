@@ -1,9 +1,12 @@
 package de.ur.mi.android.dailybuddy;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -31,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar ab = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0000ff"));
+        ab.setBackgroundDrawable(colorDrawable);
         setDate();
         setQuoteOfTheDay();
         setPicOfTheDay();
@@ -65,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 // set current date into textview
         dateButton.setText(new StringBuilder()
 // Month is 0 based, just add 1
-                .append(day).append(" ").append("-").append(month + 1).append("-")
+                .append(day).append(".").append(month+1).append(".")
                 .append(year));
     }
 
