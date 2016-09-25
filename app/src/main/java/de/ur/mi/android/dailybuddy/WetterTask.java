@@ -100,7 +100,7 @@ public class WetterTask extends AsyncTask<String, Integer, String> {
     //private void processJson(String text) {
         try {
             JSONArray jsonArray = new JSONArray(result);
-            for (int i = 0; i < jsonArray.length(); i++) {
+            for (int i = 0; i < jsonArray.length()-1; i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String city = jsonObject.getString(CITY);
                 int temperature = jsonObject.getInt(TEMPERATURE);

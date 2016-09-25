@@ -35,7 +35,7 @@ public class Wetter extends AppCompatActivity {
         wetterInfos = new ArrayList<>();
         city = (TextView) findViewById(R.id.city);
         temperature = (TextView) findViewById(R.id.temperature);
-        WetterInfo p = wetterInfos.get(0);
+        WetterInfo p = wetterInfos.get(1);
         city.setText(p.getCity());
         temperature.setText(p.getTemperature());
         new WetterTask(wetterInfos).execute(ADDRESS);
