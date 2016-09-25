@@ -38,6 +38,10 @@
             android:name=".Rechner"
             android:label="Rechner">
         </activity>
+        <activity
+            android:name=".AddNote"
+            android:label="Notizen">
+        </activity>
     </application>
 
 </manifest>

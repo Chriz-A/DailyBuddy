@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by Chris on 23.08.2016.
  */
@@ -35,7 +37,19 @@ public class Rechner extends AppCompatActivity {
     private Button button_multiplied;
     private Button button_minus;
     private Button button_plus;
+    private Button button_point;
     private Button button_equals;
+    private Button button_allClear;
+
+    private double num1;
+    private double num2;
+
+    private boolean plus;
+    private boolean minus;
+    private boolean divided;
+    private boolean multiplied;
+
+    private ArrayList<Object> input = new ArrayList<Object>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,105 +70,263 @@ public class Rechner extends AppCompatActivity {
             @Override
             public void onClick(View v){
                output.setText(output.getText()+"0");
+                input.add(0);
             }
         });
         button_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 output.setText(output.getText()+"1");
+                input.add(1);
             }
         });
         button_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 output.setText(output.getText()+"2");
+                input.add(2);
             }
         });
         button_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 output.setText(output.getText()+"3");
+                input.add(3);
             }
         });
         button_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 output.setText(output.getText()+"4");
+                input.add(4);
             }
         });
         button_5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 output.setText(output.getText()+"5");
+                input.add(5);
             }
         });
         button_6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 output.setText(output.getText()+"6");
+                input.add(6);
             }
         });
         button_7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 output.setText(output.getText()+"7");
+                input.add(7);
             }
         });
         button_8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 output.setText(output.getText()+"8");
+                input.add(8);
             }
         });
         button_9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 output.setText(output.getText()+"9");
+                input.add(9);
             }
         });
         button_divided.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                output.setText(output.getText()+"/");
+                if (output.getText() != "") {
+                    output.setText(output.getText() + "/");
+                    input.add("/");
+                }
             }
         });
         button_multiplied.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                output.setText(output.getText()+"x");
+                if (output.getText() != "") {
+                    output.setText(output.getText() + "x");
+                    input.add("x");
+                }
             }
         });
         button_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 output.setText(output.getText()+"-");
+                input.add("-");
+            }
+        });
+        button_point.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                if (output.getText() != "") {
+                    output.setText(output.getText() + ".");
+                    input.add(".");
+                }
             }
         });
         button_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                output.setText(output.getText()+"+");
+                if (output.getText() != "") {
+                    output.setText(output.getText() + "+");
+                    input.add("+");
+                }
             }
         });
         button_equals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 calculate(output);
-                output.setText("0");
+
             }
         });
+
+        button_allClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                output.setText("");
+            }
+        });
+
     }
 
     private void calculate(TextView output) {
-        String calculator = output.toString();
-        for (int i = 0; i < calculator.length(); i++ ) {
-            if (calculator.charAt(i) == '/'){
-                double result = calculator.charAt(i-1)/calculator.charAt(i+1);
 
-            } else if(calculator.charAt(i) == 'x'){
+      /**  for (int i = 0; i < input.size(); i++ ) {
+            if (input.get(i).equals("/")){
+                int result = (int) input.get(i-1) / (int) input.get(i+1);
+                output.setText(String.valueOf(result));
+            } //else if(calculator.charAt(i) == 'x'){
 
-            }
-        }
+            //}
+        }*/
+
+         String calculator = output.getText().toString();
+        String numberOne = "";
+        String numberTwo = "";
+        double firstNumber = 0;
+        double secondNumber = 0;
+
+         for (int i = 0; i < calculator.length(); i++ ) {
+             if (calculator.charAt(i) == '/'){
+                 for (int j = 0; j < i; j++){
+                     char ch = calculator.charAt(j);
+
+                     if (Character.isDigit(ch) || ch == '.'){
+                          numberOne = numberOne + calculator.charAt(j);
+                     }
+                 }
+                 firstNumber = Double.parseDouble(numberOne);
+                 for (int k = i+1; k < calculator.length(); k++){
+                     char ch2 = calculator.charAt(k);
+
+                     if (Character.isDigit(ch2) || ch2 == '.'){
+                         numberTwo = numberTwo + calculator.charAt(k);
+
+                     }
+                 }
+                 secondNumber = Double.parseDouble(numberTwo);
+                 double result = firstNumber/secondNumber;
+                 if (result % 1 == 0) {
+                     int resultInt = (int) result;
+                     output.setText(String.valueOf(resultInt));
+                 } else {
+                     output.setText(String.valueOf(result));
+                 }
+               // int result = Character.getNumericValue(calculator.charAt(i-1)) / Character.getNumericValue(calculator.charAt(i+1));
+                //int result = Integer.parseInt(Character.toString(calculator.charAt(i-1))) / Integer.parseInt(Character.toString(calculator.charAt(i+1)));
+             } //else if(calculator.charAt(i) == 'x'){
+
+             //}
+             if (calculator.charAt(i) == 'x') {
+                 for (int j = 0; j < i; j++) {
+                     char ch = calculator.charAt(j);
+
+                     if (Character.isDigit(ch) || ch == '.') {
+                         numberOne = numberOne + calculator.charAt(j);
+                     }
+                 }
+                 firstNumber = Double.parseDouble(numberOne);
+                 for (int k = i + 1; k < calculator.length(); k++) {
+                     char ch2 = calculator.charAt(k);
+
+                     if (Character.isDigit(ch2) || ch2 == '.') {
+                         numberTwo = numberTwo + calculator.charAt(k);
+
+                     }
+                 }
+                 secondNumber = Double.parseDouble(numberTwo);
+                 double result = firstNumber * secondNumber;
+                 if (result % 1 == 0) {
+                     int resultInt = (int) result;
+                     output.setText(String.valueOf(resultInt));
+                 } else {
+                     output.setText(String.valueOf(result));
+                 }
+             }
+
+             if (calculator.charAt(i) == '+') {
+                 for (int j = 0; j < i; j++) {
+                     char ch = calculator.charAt(j);
+
+                     if (Character.isDigit(ch) || ch == '.') {
+                         numberOne = numberOne + calculator.charAt(j);
+                     }
+                 }
+                 firstNumber = Double.parseDouble(numberOne);
+                 for (int k = i + 1; k < calculator.length(); k++) {
+                     char ch2 = calculator.charAt(k);
+
+                     if (Character.isDigit(ch2) || ch2 == '.') {
+                         numberTwo = numberTwo + calculator.charAt(k);
+
+                     }
+                 }
+                 secondNumber = Double.parseDouble(numberTwo);
+                 double result = firstNumber + secondNumber;
+                 if (result % 1 == 0) {
+                     int resultInt = (int) result;
+                     output.setText(String.valueOf(resultInt));
+                 } else {
+                     output.setText(String.valueOf(result));
+                 }
+             }
+
+             if (calculator.charAt(i) == '-') {
+                 for (int j = 0; j < i; j++) {
+                     char ch = calculator.charAt(j);
+
+                     if (Character.isDigit(ch) || ch == '.') {
+                         numberOne = numberOne + calculator.charAt(j);
+                     }
+                 }
+                 firstNumber = Double.parseDouble(numberOne);
+                 for (int k = i + 1; k < calculator.length(); k++) {
+                     char ch2 = calculator.charAt(k);
+
+                     if (Character.isDigit(ch2) || ch2 == '.') {
+                         numberTwo = numberTwo + calculator.charAt(k);
+
+                     }
+                 }
+                 secondNumber = Double.parseDouble(numberTwo);
+                 double result = firstNumber - secondNumber;
+                 if (result % 1 == 0) {
+                     int resultInt = (int) result;
+                     output.setText(String.valueOf(resultInt));
+                 } else {
+                     output.setText(String.valueOf(result));
+                 }
+             }
+         }
+
+
     }
 
     private void setButtons() {
@@ -173,8 +345,9 @@ public class Rechner extends AppCompatActivity {
         button_multiplied = (Button) findViewById(R.id.button_multiplied);
         button_minus = (Button) findViewById(R.id.button_minus);
         button_plus = (Button) findViewById(R.id.button_plus);
+        button_point = (Button) findViewById(R.id.button_point);
         button_equals = (Button) findViewById(R.id.button_equals);
-
+        button_allClear =(Button) findViewById(R.id.button_allClear);
 
 
     }

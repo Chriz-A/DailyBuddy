@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 /**
  * Created by Chris on 23.08.2016.
@@ -22,6 +25,15 @@ public class Notizen extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#2b7b3d"));
         ab.setBackgroundDrawable(colorDrawable);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Notizen.this, AddNote.class);
+                startActivity(i);
+            }
+        });
 
     }
 
