@@ -395,6 +395,11 @@ public class Rechner extends AppCompatActivity {
             startActivity(i);
             return true;
         }
+        if (id == R.id.stopwatch) {
+            Intent i = new Intent(this, StopWatch.class);
+            startActivity(i);
+            return true;
+        }
 
 
         return super.onOptionsItemSelected(item);

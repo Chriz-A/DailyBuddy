@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-
-
     android:orientation="vertical"
     android:weightSum="1"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -18,10 +15,10 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Datum"
+        android:text="@string/datum"
         android:gravity="center"
         android:id="@+id/button_date"
-        android:textColor="#ffffff"
+        android:textColor="@color/white"
         android:layout_weight="0.1"
         android:textSize="20sp"
         android:background="@drawable/background_color_gradient"
@@ -31,7 +28,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="Das Zitat des Tages"
+        android:text="@string/das_zitat_des_tages"
         android:paddingBottom="12dp"
         android:paddingTop="16dp"
         android:gravity="center"
@@ -43,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
-        android:text="Spruch des Tages"
+        android:text="@string/zitat_des_tages"
         android:gravity="center"
         android:id="@+id/quote_of_the_day"/>
 
@@ -58,7 +55,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="Das Bild des Tages"
+        android:text="@string/das_bild_des_tages"
         android:paddingBottom="12dp"
         android:gravity="center"
         android:layout_weight="0.2"
@@ -69,7 +66,7 @@
     <WebView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="Bild des Tages"
+        android:contentDescription="@string/bild_des_tages"
         android:layout_weight="0.3"
         android:id="@+id/pic_of_the_day"/>
 

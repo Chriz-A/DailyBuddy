@@ -12,11 +12,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * Created by Chris on 23.08.2016.
  */
 public class Notizen extends AppCompatActivity {
+
+    ListView noteList;
+
+    private ArrayList<String> notes;
+    private ArrayAdapter<String> noteAdapter;
+    private String textContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +37,37 @@ public class Notizen extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#2b7b3d"));
         ab.setBackgroundDrawable(colorDrawable);
+        notes = new ArrayList<String>();
+        noteAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, notes);
+        Bundle bundle = getIntent().getExtras();
+        if (getIntent().getStringExtra("TextContent") != null) {
+            textContent = bundle.getString("TextContent");
+            addNote(textContent);
+
+        }
+        noteList = (ListView) findViewById(R.id.Notizen);
+        noteList.setAdapter(noteAdapter);
+        noteList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                                           int position, long id) {
+                removeTaskAtPosition(position);
+                Toast.makeText(getApplicationContext(), R.string.notiz_gelöscht,
+                        Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+        noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                String fullText = notes.get(position);
+                Intent i = new Intent(Notizen.this, AddNote.class);
+                i.putExtra("fullNote", fullText);
+                startActivity(i);
+            }
+        });
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +77,20 @@ public class Notizen extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+    }
+
+    private void removeTaskAtPosition(int position) {
+
+            notes.remove(position);
+            noteAdapter.notifyDataSetChanged();
+
+    }
+
+    private void addNote(String textContent) {
+
+            notes.add(textContent);
+            noteAdapter.notifyDataSetChanged();
 
     }
 
@@ -77,6 +134,11 @@ public class Notizen extends AppCompatActivity {
         }
         if (id == R.id.rechnerfunktion_aufrufen) {
             Intent i = new Intent(this, Rechner.class);
+            startActivity(i);
+            return true;
+        }
+        if (id == R.id.stopwatch) {
+            Intent i = new Intent(this, StopWatch.class);
             startActivity(i);
             return true;
         }

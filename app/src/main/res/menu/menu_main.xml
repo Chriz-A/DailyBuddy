@@ -29,9 +29,9 @@
         android:title="@string/rechnerfunktion_aufrufen"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/stopwatch"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/stoppuhr_aufrufen"
         app:showAsAction="never" />
 
 

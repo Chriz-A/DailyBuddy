@@ -6,4 +6,37 @@
     <string name="rechnerfunktion_aufrufen">Rechner</string>
     <string name="notizfunktion_aufrufen">Notizen</string>
     <string name="home">Home</string>
+    <string name="stoppuhr_aufrufen">Stoppuhr</string>
+    <string name="stadt">Stadt</string>
+    <string name="temperatur">--</string>
+    <string name="startzeit">00:00:00</string>
+    <string name="start_pauseButton">Start</string>
+    <string name="stopButton">Stop</string>
+    <string name="dividedButton">/</string>
+    <string name="seven">7</string>
+    <string name="equalButton">=</string>
+    <string name="allClearButton">AC</string>
+    <string name="point">.</string>
+    <string name="zero">0</string>
+    <string name="plusButton">+</string>
+    <string name="three">3</string>
+    <string name="two">2</string>
+    <string name="one">1</string>
+    <string name="minusButton">-</string>
+    <string name="six">6</string>
+    <string name="five">5</string>
+    <string name="four">4</string>
+    <string name="multipliedButton">x</string>
+    <string name="nine">9</string>
+    <string name="eight">8</string>
+    <string name="bild_des_tages">Bild des Tages</string>
+    <string name="das_bild_des_tages">Das Bild des Tages</string>
+    <string name="zitat_des_tages">Zitat des Tages</string>
+    <string name="das_zitat_des_tages">Das Zitat des Tages</string>
+    <string name="datum">Datum</string>
+    <string name="pause">Pause</string>
+    <string name="start">Start</string>
+    <string name="notiz_gelöscht">Notiz gelöscht</string>
+    <string name="notiz_gespeichert">Notiz gespeichert</string>
+
 </resources>

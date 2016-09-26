@@ -12,7 +12,7 @@
         android:id="@+id/output"
         android:layout_weight="0.25"
         android:textSize="20sp"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         />
 
     <LinearLayout
@@ -59,9 +59,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="0.25"
-        android:text="/"
+        android:text="@string/dividedButton"
         android:textSize="30sp"
-
         android:id="@+id/button_divided"
         android:background="@drawable/rounded_corners_button"
         android:layout_margin="1dp"
@@ -83,11 +82,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="7"
+            android:text="@string/seven"
             android:id="@+id/button_7"
             android:textSize="30sp"
             android:background="@drawable/round_button"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:layout_margin="1dp"
 
             />
@@ -96,11 +95,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="8"
+            android:text="@string/eight"
             android:id="@+id/button_8"
             android:textSize="30sp"
             android:background="@drawable/round_button"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:layout_margin="1dp"
 
             />
@@ -109,11 +108,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="9"
+            android:text="@string/nine"
             android:id="@+id/button_9"
             android:textSize="30sp"
             android:background="@drawable/round_button"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:layout_margin="1dp"
 
             />
@@ -122,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="x"
+            android:text="@string/multipliedButton"
             android:id="@+id/button_multiplied"
             android:textSize="30sp"
             android:background="@drawable/rounded_corners_button"
@@ -146,11 +145,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="4"
+            android:text="@string/four"
             android:id="@+id/button_4"
             android:textSize="30sp"
             android:background="@drawable/round_button"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:layout_margin="1dp"
 
 
@@ -160,11 +159,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="5"
+            android:text="@string/five"
             android:id="@+id/button_5"
             android:textSize="30sp"
             android:background="@drawable/round_button"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:layout_margin="1dp"
 
 
@@ -174,11 +173,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="6"
+            android:text="@string/six"
             android:id="@+id/button_6"
             android:textSize="30sp"
             android:background="@drawable/round_button"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:layout_margin="1dp"
 
 
@@ -188,7 +187,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="-"
+            android:text="@string/minusButton"
             android:id="@+id/button_minus"
             android:textSize="30sp"
             android:background="@drawable/rounded_corners_button"
@@ -213,11 +212,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="1"
+            android:text="@string/one"
             android:id="@+id/button_1"
             android:textSize="30sp"
             android:background="@drawable/round_button"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:layout_margin="1dp"
 
 
@@ -227,11 +226,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="2"
+            android:text="@string/two"
             android:id="@+id/button_2"
             android:textSize="30sp"
             android:background="@drawable/round_button"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:layout_margin="1dp"
 
 
@@ -242,11 +241,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="3"
+            android:text="@string/three"
             android:id="@+id/button_3"
             android:textSize="30sp"
             android:background="@drawable/round_button"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:layout_margin="1dp"
 
             />
@@ -255,14 +254,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="+"
+            android:text="@string/plusButton"
             android:id="@+id/button_plus"
             android:textSize="30sp"
             android:background="@drawable/rounded_corners_button"
             android:layout_margin="1dp"
-
-
-
             />
 
 
@@ -283,11 +279,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="0"
+            android:text="@string/zero"
             android:id="@+id/button_0"
             android:textSize="30sp"
             android:background="@drawable/round_button"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
 
             />
 
@@ -295,12 +291,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="."
+            android:text="@string/point"
             android:textSize="30sp"
             android:background="@drawable/rounded_corners_button"
             android:layout_margin="1dp"
             android:id="@+id/button_point"
-
             />
 
 
@@ -308,13 +303,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="AC"
+            android:text="@string/allClearButton"
             android:id="@+id/button_allClear"
             android:textSize="30sp"
             android:background="@drawable/rounded_corners_button"
-
             android:layout_margin="1dp"
-
             />
 
 
@@ -324,15 +317,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:text="="
+            android:text="@string/equalButton"
             android:id="@+id/button_equals"
             android:textSize="30sp"
             android:background="@drawable/rounded_corners_button"
-
             android:layout_margin="1dp"
-
-
-
             />
 
 
