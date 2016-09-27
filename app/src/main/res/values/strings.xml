@@ -38,5 +38,6 @@
     <string name="start">Start</string>
     <string name="notiz_gelöscht">Notiz gelöscht</string>
     <string name="notiz_gespeichert">Notiz gespeichert</string>
+    <string name="title">Titel</string>
 
 </resources>

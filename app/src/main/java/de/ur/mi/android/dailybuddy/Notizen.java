@@ -18,6 +18,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by Chris on 23.08.2016.
@@ -26,37 +29,23 @@ public class Notizen extends AppCompatActivity {
 
     ListView noteList;
 
-    private ArrayList<String> notes;
-    private ArrayAdapter<String> noteAdapter;
-    private String textContent;
+    private ArrayList<String> notes = new ArrayList<String>();
+    private NoteAdapter noteAdapter;
+    private String noteText = "";
+    private NoteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notizen);
-        ActionBar ab = getSupportActionBar();
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#2b7b3d"));
-        ab.setBackgroundDrawable(colorDrawable);
-        notes = new ArrayList<String>();
-        noteAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, notes);
-        Bundle bundle = getIntent().getExtras();
-        if (getIntent().getStringExtra("TextContent") != null) {
-            textContent = bundle.getString("TextContent");
-            addNote(textContent);
-
-        }
+        setActionBarColor();
+        initDB();
+        initListAdapter();
+        addNewNote(noteText);
+        openNote();
         noteList = (ListView) findViewById(R.id.Notizen);
         noteList.setAdapter(noteAdapter);
-        noteList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                           int position, long id) {
-                removeTaskAtPosition(position);
-                Toast.makeText(getApplicationContext(), R.string.notiz_gelöscht,
-                        Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
+        removeListItem();
 
         noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -69,6 +58,24 @@ public class Notizen extends AppCompatActivity {
         });
 
 
+
+
+    }
+
+    private void removeListItem() {
+        noteList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                                           int position, long id) {
+                removeNote(position);
+                Toast.makeText(getApplicationContext(), R.string.notiz_gelöscht,
+                        Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+    }
+
+    private void openNote() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,20 +84,65 @@ public class Notizen extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
     }
 
-    private void removeTaskAtPosition(int position) {
+    private void setActionBarColor() {
+        ActionBar ab = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#2b7b3d"));
+        ab.setBackgroundDrawable(colorDrawable);
+    }
 
-            notes.remove(position);
+
+    @Override
+    protected void onDestroy() {
+        db.close();
+        super.onDestroy();
+    }
+
+    private void initDB() {
+        db = new NoteDatabase(this);
+        db.open();
+    }
+
+    private void initListAdapter() {
+        ListView list = (ListView) findViewById(R.id.Notizen);
+        noteAdapter = new NoteAdapter(this, notes);
+        list.setAdapter(noteAdapter);
+    }
+
+
+    private void updateList() {
+        notes.clear();
+        notes.addAll(db.getAllNotes());
+        noteAdapter.notifyDataSetChanged();
+    }
+
+    private void addNewNote(String noteText) {
+        Bundle bundle = getIntent().getExtras();
+        if (getIntent().getStringExtra("TextNote") != null) {
+            noteText = bundle.getString("TextNote");
+            addNote(noteText);
+
+        }
+
+        //String newNote = new String(noteText);
+
+        //db.insertNote(noteText);
+        //updateList();
+    }
+
+    private void removeNote(int position) {
+            notes.remove(notes.get(position));
+            db.removeNote(notes.get(position));
             noteAdapter.notifyDataSetChanged();
 
     }
+    private void addNote(String noteText) {
 
-    private void addNote(String textContent) {
-
-            notes.add(textContent);
-            noteAdapter.notifyDataSetChanged();
+        db.insertNote(noteText);
+        updateList();
+            //notes.add(title);
+            //noteAdapter.notifyDataSetChanged();
 
     }
 

@@ -4,58 +4,62 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
- * Created by Chris on 24.09.2016.
+ * Created by Chris on 25.09.2016.
  */
-public class AddNote extends AppCompatActivity {
+public class StopWatch extends AppCompatActivity{
 
-    private EditText newNote;
+    private TextView time;
+    private Button start_pause;
+    private Button stop;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_note);
-        setActionBarColor();
-        newNote = (EditText) findViewById(R.id.note_text);
-
-        Bundle bundle = getIntent().getExtras();
-        if (getIntent().getStringExtra("fullNote") != null) {
-            String fullText = bundle.getString("fullNote");
-            newNote.setText(fullText);
-
-        }
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.stopwatch);
+        ActionBar ab = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#000000"));
+        ab.setBackgroundDrawable(colorDrawable);
+        time = (TextView) findViewById(R.id.time);
+        start_pause = (Button) findViewById(R.id.start);
+        stop = (Button) findViewById(R.id.stop);
+        start_pause.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent i = new Intent(AddNote.this, Notizen.class);
-                if (newNote.getText().toString() != "") {
-                    i.putExtra("TextNote", newNote.getText().toString());
-                }
-                startActivity(i);
-                Toast.makeText(getApplicationContext(), "Notiz gespeichert",
-                        Toast.LENGTH_SHORT).show();
+            public void onClick(View v){
+                changeButton();
             }
         });
-
+        stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                resetTime();
+            }
+        });
     }
 
-    private void setActionBarColor() {
-        ActionBar ab = getSupportActionBar();
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#2b7b3d"));
-        ab.setBackgroundDrawable(colorDrawable);
+    private void resetTime() {
+        time.setText(R.string.startzeit);
     }
+
+    private void changeButton() {
+        String buttonText = start_pause.getText().toString();
+        if (buttonText.equals("Start")) {
+            start_pause.setText(R.string.pause);
+        } else if (buttonText.equals("Pause")){
+            start_pause.setText(R.string.start);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,5 +113,4 @@ public class AddNote extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

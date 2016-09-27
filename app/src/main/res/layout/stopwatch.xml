@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/startzeit"
+        android:layout_gravity="center"
+        android:textSize="50sp"
+        android:id="@+id/time"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_pauseButton"
+        android:id="@+id/start"
+        android:background="@drawable/button_stopwatch"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white"/>
+    />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stopButton"
+        android:id="@+id/stop"
+        android:background="@drawable/button_stopwatch"
+        android:textColor="@color/white"/>
+
+
+
+
+</LinearLayout>

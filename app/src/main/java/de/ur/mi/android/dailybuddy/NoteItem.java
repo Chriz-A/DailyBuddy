@@ -5,13 +5,18 @@ package de.ur.mi.android.dailybuddy;
  */
 public class NoteItem {
 
-    private String textPreview;
 
-    public NoteItem(String textPreview){
-        this.textPreview = textPreview;
+    private int id;
+    private String title;
+
+
+
+    public NoteItem(String title){
+        this.title = title;
+        id = -1;
     }
 
-    public String getTextPreview(){
-        return textPreview;
+    public String getTitle(){
+        return title;
     }
 }
