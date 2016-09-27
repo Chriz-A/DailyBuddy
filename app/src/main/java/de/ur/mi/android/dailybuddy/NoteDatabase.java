@@ -27,7 +27,6 @@ public class NoteDatabase {
     public static final String KEY_TEXT = "text";
 
     public static final int COLUMN_TEXT_INDEX = 1;
-    public static final int COLUMN_DATE_INDEX = 2;
 
     private NoteDBOpenHelper dbHelper;
 
@@ -76,7 +75,7 @@ public class NoteDatabase {
 
 
 
-                items.add(new String(text));
+                items.add(text);
 
             } while (cursor.moveToNext());
         }

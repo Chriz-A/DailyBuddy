@@ -31,6 +31,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_done_white_24px"
-        app:backgroundTint="@android:color/holo_green_dark"/>
+        app:backgroundTint="@color/green"/>
 
 </RelativeLayout>

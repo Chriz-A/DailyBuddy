@@ -29,9 +29,7 @@ public class Wetter extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wetter);
-        ActionBar ab = getSupportActionBar();
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#ffa500"));
-        ab.setBackgroundDrawable(colorDrawable);
+        setActionBarColor();
         wetterInfos = new ArrayList<>();
         city = (TextView) findViewById(R.id.city);
         temperature = (TextView) findViewById(R.id.temperature);
@@ -39,6 +37,12 @@ public class Wetter extends AppCompatActivity {
         city.setText(p.getCity());
         temperature.setText(p.getTemperature());
         new WetterTask(wetterInfos).execute(ADDRESS);
+    }
+
+    private void setActionBarColor() {
+        ActionBar ab = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor(getResources().getString(0+R.color.orange)));
+        ab.setBackgroundDrawable(colorDrawable);
     }
 
     @Override

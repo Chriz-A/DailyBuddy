@@ -46,6 +46,7 @@ public class Notizen extends AppCompatActivity {
         noteList = (ListView) findViewById(R.id.Notizen);
         noteList.setAdapter(noteAdapter);
         removeListItem();
+        updateList();
 
         noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -88,7 +89,7 @@ public class Notizen extends AppCompatActivity {
 
     private void setActionBarColor() {
         ActionBar ab = getSupportActionBar();
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#2b7b3d"));
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor(getResources().getString(0+R.color.green)));
         ab.setBackgroundDrawable(colorDrawable);
     }
 
@@ -132,9 +133,9 @@ public class Notizen extends AppCompatActivity {
     }
 
     private void removeNote(int position) {
-            notes.remove(notes.get(position));
             db.removeNote(notes.get(position));
-            noteAdapter.notifyDataSetChanged();
+        notes.remove(notes.get(position));
+        noteAdapter.notifyDataSetChanged();
 
     }
     private void addNote(String noteText) {

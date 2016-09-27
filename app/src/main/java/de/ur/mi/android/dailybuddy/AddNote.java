@@ -53,7 +53,7 @@ public class AddNote extends AppCompatActivity {
 
     private void setActionBarColor() {
         ActionBar ab = getSupportActionBar();
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#2b7b3d"));
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor(getResources().getString(0+R.color.green)));
         ab.setBackgroundDrawable(colorDrawable);
     }
 

@@ -21,11 +21,15 @@ public class Kalender extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.kalender);
+        setActionBarColor();
+
+
+    }
+
+    private void setActionBarColor() {
         ActionBar ab = getSupportActionBar();
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#ff0000"));
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor(getResources().getString(0+R.color.red)));
         ab.setBackgroundDrawable(colorDrawable);
-
-
     }
 
     @Override

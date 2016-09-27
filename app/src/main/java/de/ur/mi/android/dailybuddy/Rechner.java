@@ -58,11 +58,15 @@ public class Rechner extends AppCompatActivity {
         output = (TextView) findViewById(R.id.output);
         setButtons();
         clickButtons();
+        setActionBarColor();
+
+
+    }
+
+    private void setActionBarColor() {
         ActionBar ab = getSupportActionBar();
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#381938"));
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor(getResources().getString(0+R.color.purple)));
         ab.setBackgroundDrawable(colorDrawable);
-
-
     }
 
     private void clickButtons() {

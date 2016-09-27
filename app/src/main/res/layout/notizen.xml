@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/Notizen"
+        android:animateLayoutChanges="true"
         />
 
     <android.support.design.widget.FloatingActionButton
@@ -20,7 +21,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_add_white_24px"
-        app:backgroundTint="@android:color/holo_green_dark"/>
+        app:backgroundTint="@color/green"/>
 
 
 

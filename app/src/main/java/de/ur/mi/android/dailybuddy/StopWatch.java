@@ -27,9 +27,7 @@ public class StopWatch extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stopwatch);
-        ActionBar ab = getSupportActionBar();
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#000000"));
-        ab.setBackgroundDrawable(colorDrawable);
+        setActionBarColor();
         time = (TextView) findViewById(R.id.time);
         start_pause = (Button) findViewById(R.id.start);
         stop = (Button) findViewById(R.id.stop);
@@ -59,6 +57,13 @@ public class StopWatch extends AppCompatActivity{
             start_pause.setText(R.string.start);
         }
     }
+
+    private void setActionBarColor() {
+        ActionBar ab = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor(getResources().getString(0+R.color.black)));
+        ab.setBackgroundDrawable(colorDrawable);
+    }
+
 
 
     @Override

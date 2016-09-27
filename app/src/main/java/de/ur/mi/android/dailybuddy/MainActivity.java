@@ -34,9 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActionBar ab = getSupportActionBar();
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0000ff"));
-        ab.setBackgroundDrawable(colorDrawable);
+        setActionBarColor();
         setDate();
         setQuoteOfTheDay();
         setPicOfTheDay();
@@ -50,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void setActionBarColor() {
+        ActionBar ab = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor(getResources().getString(0+R.color.blue)));
+        ab.setBackgroundDrawable(colorDrawable);
     }
 
     private void setPicOfTheDay() {
