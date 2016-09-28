@@ -4,14 +4,15 @@
     android:layout_height="match_parent"
     android:gravity="center">
 
-    <TextView
+
+
+    <Chronometer
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/startzeit"
-        android:layout_gravity="center"
         android:textSize="50sp"
         android:id="@+id/time"
         />
+
 
     <Button
         android:layout_width="wrap_content"
@@ -31,6 +32,8 @@
         android:id="@+id/stop"
         android:background="@drawable/button_stopwatch"
         android:textColor="@color/white"/>
+
+
 
 
 

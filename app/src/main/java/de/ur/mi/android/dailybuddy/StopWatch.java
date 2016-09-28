@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
 /**
@@ -17,9 +19,12 @@ import android.widget.TextView;
  */
 public class StopWatch extends AppCompatActivity{
 
+    private Chronometer chronometer;
     private TextView time;
     private Button start_pause;
     private Button stop;
+    private long stoppedTime;
+    private boolean firstStart = true;
 
 
 
@@ -28,7 +33,7 @@ public class StopWatch extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stopwatch);
         setActionBarColor();
-        time = (TextView) findViewById(R.id.time);
+        setChronometer();
         start_pause = (Button) findViewById(R.id.start);
         stop = (Button) findViewById(R.id.stop);
         start_pause.setOnClickListener(new View.OnClickListener() {
@@ -45,16 +50,35 @@ public class StopWatch extends AppCompatActivity{
         });
     }
 
+    private void setChronometer() {
+        chronometer = (Chronometer) findViewById(R.id.time);
+    }
+
     private void resetTime() {
-        time.setText(R.string.startzeit);
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.stop();
     }
 
     private void changeButton() {
         String buttonText = start_pause.getText().toString();
         if (buttonText.equals("Start")) {
-            start_pause.setText(R.string.pause);
+            if (firstStart){
+                start_pause.setText(R.string.pause);
+                chronometer.start();
+                firstStart = false;
+            } else {
+
+
+                start_pause.setText(R.string.pause);
+                //long elapsedTime = SystemClock.elapsedRealtime() - chronometer.getBase();
+                chronometer.setBase(chronometer.getBase() + SystemClock.elapsedRealtime() - stoppedTime);
+                chronometer.start();
+            }
         } else if (buttonText.equals("Pause")){
             start_pause.setText(R.string.start);
+            stoppedTime = SystemClock.elapsedRealtime();
+            chronometer.stop();
+
         }
     }
 
@@ -80,10 +104,7 @@ public class StopWatch extends AppCompatActivity{
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
         if (id == R.id.home) {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);

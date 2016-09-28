@@ -20,6 +20,8 @@ import android.widget.Toast;
 public class AddNote extends AppCompatActivity {
 
     private EditText newNote;
+    private int position;
+    private String fullText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +32,9 @@ public class AddNote extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (getIntent().getStringExtra("fullNote") != null) {
-            String fullText = bundle.getString("fullNote");
+            fullText = bundle.getString("fullNote");
             newNote.setText(fullText);
+            position = bundle.getInt("listItem");
 
         }
 
@@ -40,8 +43,13 @@ public class AddNote extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(AddNote.this, Notizen.class);
+               /** if (fullText != "") {
+                    i.putExtra("position", position);
+                    i.putExtra("TextNote", newNote.getText().toString());
+                }*/
                 if (newNote.getText().toString() != "") {
                     i.putExtra("TextNote", newNote.getText().toString());
+                    i.putExtra("position", position);
                 }
                 startActivity(i);
                 Toast.makeText(getApplicationContext(), "Notiz gespeichert",
@@ -71,11 +79,41 @@ public class AddNote extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case R.id.home:
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
+                return true;
+
+
+        case R.id.kalenderansicht_abrufen:
+        i = new Intent(this, Kalender.class);
+        startActivity(i);
+        return true;
+
+    case R.id.notizfunktion_aufrufen:
+    i = new Intent(this, Notizen.class);
+    startActivity(i);
+    return true;
+
+case R.id.wetterinformationen_abrufen:
+        i = new Intent(this, Wetter.class);
+        startActivity(i);
+        return true;
+
+        case R.id.rechnerfunktion_aufrufen:
+        i = new Intent(this, Rechner.class);
+        startActivity(i);
+        return true;
+
+        case R.id.stopwatch:
+        i = new Intent(this, StopWatch.class);
+        startActivity(i);
+        return true;
+
         }
-        if (id == R.id.home) {
+
+       /** if (id == R.id.home) {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
             return true;
@@ -104,7 +142,7 @@ public class AddNote extends AppCompatActivity {
             Intent i = new Intent(this, StopWatch.class);
             startActivity(i);
             return true;
-        }
+        }*/
 
 
         return super.onOptionsItemSelected(item);

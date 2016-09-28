@@ -54,6 +54,7 @@ public class Notizen extends AppCompatActivity {
                 String fullText = notes.get(position);
                 Intent i = new Intent(Notizen.this, AddNote.class);
                 i.putExtra("fullNote", fullText);
+                i.putExtra("listItem", position);
                 startActivity(i);
             }
         });
@@ -120,16 +121,24 @@ public class Notizen extends AppCompatActivity {
 
     private void addNewNote(String noteText) {
         Bundle bundle = getIntent().getExtras();
-        if (getIntent().getStringExtra("TextNote") != null) {
+
+            if (getIntent().getStringExtra("TextNote") != null && getIntent().getStringExtra("position") != null) {
+                noteText = bundle.getString("TextNote");
+                int position = bundle.getInt("position");
+                removeNote(position);
+                addNote(noteText);
+
+            } else if (getIntent().getStringExtra("TextNote") != null) {
             noteText = bundle.getString("TextNote");
             addNote(noteText);
 
-        }
+            }
 
-        //String newNote = new String(noteText);
+            //String newNote = new String(noteText);
 
-        //db.insertNote(noteText);
-        //updateList();
+            //db.insertNote(noteText);
+            //updateList();
+
     }
 
     private void removeNote(int position) {
@@ -161,10 +170,7 @@ public class Notizen extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
         if (id == R.id.home) {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
