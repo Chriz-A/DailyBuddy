@@ -105,36 +105,38 @@ public class StopWatch extends AppCompatActivity{
         int id = item.getItemId();
 
 
-        if (id == R.id.home) {
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-            return true;
+        switch (id){
+            case R.id.home:
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
+                return true;
+
+            case R.id.kalenderansicht_abrufen:
+                i = new Intent(this, Kalender.class);
+                startActivity(i);
+                return true;
+
+            case R.id.notizfunktion_aufrufen:
+                i = new Intent(this, Notizen.class);
+                startActivity(i);
+                return true;
+
+            case R.id.wetterinformationen_abrufen:
+                i = new Intent(this, Wetter.class);
+                startActivity(i);
+                return true;
+
+            case R.id.rechnerfunktion_aufrufen:
+                i = new Intent(this, Rechner.class);
+                startActivity(i);
+                return true;
+
+            case R.id.stopwatch:
+                i = new Intent(this, StopWatch.class);
+                startActivity(i);
+                return true;
         }
-        if (id == R.id.kalenderansicht_abrufen) {
-            Intent i = new Intent(this, Kalender.class);
-            startActivity(i);
-            return true;
-        }
-        if (id == R.id.notizfunktion_aufrufen) {
-            Intent i = new Intent(this, Notizen.class);
-            startActivity(i);
-            return true;
-        }
-        if (id == R.id.wetterinformationen_abrufen) {
-            Intent i = new Intent(this, Wetter.class);
-            startActivity(i);
-            return true;
-        }
-        if (id == R.id.rechnerfunktion_aufrufen) {
-            Intent i = new Intent(this, Rechner.class);
-            startActivity(i);
-            return true;
-        }
-        if (id == R.id.stopwatch) {
-            Intent i = new Intent(this, StopWatch.class);
-            startActivity(i);
-            return true;
-        }
+
 
 
         return super.onOptionsItemSelected(item);

@@ -85,32 +85,30 @@ public class AddNote extends AppCompatActivity {
                 startActivity(i);
                 return true;
 
+            case R.id.kalenderansicht_abrufen:
+                i = new Intent(this, Kalender.class);
+                startActivity(i);
+                return true;
 
-        case R.id.kalenderansicht_abrufen:
-        i = new Intent(this, Kalender.class);
-        startActivity(i);
-        return true;
+            case R.id.notizfunktion_aufrufen:
+                i = new Intent(this, Notizen.class);
+                startActivity(i);
+                return true;
 
-    case R.id.notizfunktion_aufrufen:
-    i = new Intent(this, Notizen.class);
-    startActivity(i);
-    return true;
+            case R.id.wetterinformationen_abrufen:
+                i = new Intent(this, Wetter.class);
+                startActivity(i);
+                return true;
 
-case R.id.wetterinformationen_abrufen:
-        i = new Intent(this, Wetter.class);
-        startActivity(i);
-        return true;
+            case R.id.rechnerfunktion_aufrufen:
+                i = new Intent(this, Rechner.class);
+                startActivity(i);
+                return true;
 
-        case R.id.rechnerfunktion_aufrufen:
-        i = new Intent(this, Rechner.class);
-        startActivity(i);
-        return true;
-
-        case R.id.stopwatch:
-        i = new Intent(this, StopWatch.class);
-        startActivity(i);
-        return true;
-
+            case R.id.stopwatch:
+                i = new Intent(this, StopWatch.class);
+                startActivity(i);
+                return true;
         }
 
        /** if (id == R.id.home) {
