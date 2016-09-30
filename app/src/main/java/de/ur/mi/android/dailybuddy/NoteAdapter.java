@@ -9,9 +9,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Chris on 26.09.2016.
- */
+
 public class NoteAdapter extends ArrayAdapter<String> {
 
     private ArrayList<String> noteList;
@@ -19,7 +17,6 @@ public class NoteAdapter extends ArrayAdapter<String> {
 
     public NoteAdapter(Context context, ArrayList<String> noteList) {
         super(context, R.layout.list_item_note, noteList);
-
         this.context = context;
         this.noteList = noteList;
     }
@@ -27,24 +24,23 @@ public class NoteAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View v = convertView;
+        View view = convertView;
 
-        if (v == null) {
+        if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.list_item_note, null);
-
+            view = inflater.inflate(R.layout.list_item_note, null);
         }
 
         String note = noteList.get(position);
 
         if (note != null) {
-            TextView text = (TextView) v.findViewById(R.id.text);
+            TextView text = (TextView) view.findViewById(R.id.text);
 
             text.setText(note);
         }
 
-        return v;
+        return view;
     }
 
 }

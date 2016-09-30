@@ -38,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
         setDate();
         setQuoteOfTheDay();
         setPicOfTheDay();
+        setDateButton();
+    }
+
+    private void setDateButton() {
         dateButton = (Button) findViewById(R.id.button_date);
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
     }
 
     private void setActionBarColor() {
@@ -68,13 +70,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setDate() {
         dateButton = (Button) findViewById(R.id.button_date);
-        final Calendar cal = Calendar.getInstance();
-        day = cal.get(Calendar.DAY_OF_MONTH);
-        month = cal.get(Calendar.MONTH);
-        year = cal.get(Calendar.YEAR);
-// set current date into textview
+        final Calendar calender = Calendar.getInstance();
+        day = calender.get(Calendar.DAY_OF_MONTH);
+        month = calender.get(Calendar.MONTH);
+        year = calender.get(Calendar.YEAR);
         dateButton.setText(new StringBuilder()
-// Month is 0 based, just add 1
                 .append(day).append(".").append(month+1).append(".")
                 .append(year));
     }
@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
 
         switch (id){
             case R.id.home:
@@ -125,9 +124,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 return true;
         }
-
-
-
 
         return super.onOptionsItemSelected(item);
     }

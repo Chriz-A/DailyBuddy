@@ -14,14 +14,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by Chris on 24.09.2016.
- */
+
 public class AddNote extends AppCompatActivity {
 
     private EditText newNote;
     private int position;
-    private String fullText;
+    private boolean positionAvailable = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,34 +28,39 @@ public class AddNote extends AppCompatActivity {
         setContentView(R.layout.add_note);
         setActionBarColor();
         newNote = (EditText) findViewById(R.id.note_text);
+        openSavedNote();
+        saveNote();
+    }
 
-        Bundle bundle = getIntent().getExtras();
-        if (getIntent().getStringExtra("fullNote") != null) {
-            fullText = bundle.getString("fullNote");
-            newNote.setText(fullText);
-            position = bundle.getInt("listItem");
-
-        }
-
+    private void saveNote() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(AddNote.this, Notizen.class);
-               /** if (fullText != "") {
-                    i.putExtra("position", position);
-                    i.putExtra("TextNote", newNote.getText().toString());
-                }*/
+                final Bundle bundle = getIntent().getExtras();
                 if (newNote.getText().toString() != "") {
                     i.putExtra("TextNote", newNote.getText().toString());
-                    i.putExtra("position", position);
+                    if (positionAvailable) {
+                        i.putExtra("position", bundle.getInt("listItem"));
+                    }
                 }
+                positionAvailable = false;
                 startActivity(i);
                 Toast.makeText(getApplicationContext(), "Notiz gespeichert",
                         Toast.LENGTH_SHORT).show();
             }
         });
 
+    }
+
+    private void openSavedNote() {
+        final Bundle bundle = getIntent().getExtras();
+        if (getIntent().getStringExtra("fullNote") != null) {
+            newNote.setText(bundle.getString("fullNote"));
+            position = bundle.getInt("listItem");
+            positionAvailable = true;
+        }
     }
 
     private void setActionBarColor() {
@@ -110,38 +114,6 @@ public class AddNote extends AppCompatActivity {
                 startActivity(i);
                 return true;
         }
-
-       /** if (id == R.id.home) {
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-            return true;
-        }
-        if (id == R.id.kalenderansicht_abrufen) {
-            Intent i = new Intent(this, Kalender.class);
-            startActivity(i);
-            return true;
-        }
-        if (id == R.id.notizfunktion_aufrufen) {
-            Intent i = new Intent(this, Notizen.class);
-            startActivity(i);
-            return true;
-        }
-        if (id == R.id.wetterinformationen_abrufen) {
-            Intent i = new Intent(this, Wetter.class);
-            startActivity(i);
-            return true;
-        }
-        if (id == R.id.rechnerfunktion_aufrufen) {
-            Intent i = new Intent(this, Rechner.class);
-            startActivity(i);
-            return true;
-        }
-        if (id == R.id.stopwatch) {
-            Intent i = new Intent(this, StopWatch.class);
-            startActivity(i);
-            return true;
-        }*/
-
 
         return super.onOptionsItemSelected(item);
     }

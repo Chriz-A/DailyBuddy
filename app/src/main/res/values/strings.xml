@@ -39,5 +39,8 @@
     <string name="notiz_gelöscht">Notiz gelöscht</string>
     <string name="notiz_gespeichert">Notiz gespeichert</string>
     <string name="title">Titel</string>
+    <string name="noNotesExisting">Keine Notizen vorhanden</string>
+    <string name="place">Ort</string>
+    <string name="search">Suchen</string>
 
 </resources>

@@ -31,20 +31,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
 
-/**
- * Created by Chris on 23.08.2016.
- */
-public class Wetter extends AppCompatActivity  {
 
+public class Wetter extends AppCompatActivity  {
 
     private static final String CITY = "name";
     private static final String TEMPERATURE = "temp";
     private static final String HUMIDITY = "humidity";
     private static final String WINDSPEED = "speed";
-    private static final String MINTEMP = "temp_min";
-    private static final String MAXTEMP = "temp_max";
     private static final String SUNRISE = "sunrise";
     private static final String SUNSET = "sunset";
+    private static final String DESCRIPTION = "description";
 
 
     private TextView city;
@@ -52,11 +48,8 @@ public class Wetter extends AppCompatActivity  {
     private TextView temperature;
     private TextView humidity;
     private TextView windspeed;
-    private TextView minTemp;
-    private TextView maxTemp;
     private TextView sunrise;
     private TextView sunset;
-    private TextView icon;
     private EditText place;
     private Button search_place;
     private String address = "";
@@ -68,21 +61,21 @@ public class Wetter extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wetter);
         setActionBarColor();
-
-        place = (EditText) findViewById(R.id.search_place);
-
-        search_place = (Button) findViewById(R.id.button_search);
+        clickSearchButton();
         new WetterTask().execute(ADDRESS_START + "berlin" + ADDRESS_END);
+    }
+
+    private void clickSearchButton() {
+        place = (EditText) findViewById(R.id.search_place);
+        search_place = (Button) findViewById(R.id.button_search);
         search_place.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-               // address="";
                 address = place.getText().toString().toLowerCase().trim();
                 new WetterTask().execute(ADDRESS_START + address + ADDRESS_END);
             }
         });
     }
-
 
 
     private void setActionBarColor() {
@@ -93,21 +86,6 @@ public class Wetter extends AppCompatActivity  {
 
     public class WetterTask extends AsyncTask <String, Integer, String>  {
 
-
-
-
-        //private ArrayList<WetterInfo> wetterInfos;
-
-
-        //public WetterTask(ArrayList<WetterInfo> wetterInfos) {
-
-            //this.wetterInfos = wetterInfos;
-
-            /**private final Wetter Wetter;
-
-             public WetterTask(Wetter Wetter) {
-             this.Wetter = Wetter;*/
-        //}
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -116,10 +94,8 @@ public class Wetter extends AppCompatActivity  {
             temperature = (TextView) findViewById(R.id.temperature);
             humidity = (TextView) findViewById(R.id.value_humidity);
             windspeed = (TextView) findViewById(R.id.value_wind_speed);
-
             sunrise = (TextView) findViewById(R.id.value_sunrise);
             sunset = (TextView) findViewById(R.id.value_sunset);
-
          }
 
         @Override
@@ -152,120 +128,50 @@ public class Wetter extends AppCompatActivity  {
         @Override
         protected void onPostExecute(String result)  {
             super.onPostExecute(result);
-            processJson(result);
-        }
-            /** String test = result;
-             try {
-             // parse the json result returned from the service
-             JSONObject jsonResult = new JSONObject(test);
-
-             // parse out the temperature from the JSON result
-             double temperature = jsonResult.getJSONObject(“main”).getDouble(“temp”);
-             temperature = ConvertTemperatureToFarenheit(temperature);
-
-             // parse out the pressure from the JSON Result
-             double pressure = jsonResult.getJSONObject(“main”).getDouble(“pressure”);
-
-             // parse out the humidity from the JSON result
-             double humidity = jsonResult.getJSONObject(“main”).getDouble(“humidity”);
-
-             // parse out the description from the JSON result
-             String description = jsonResult.getJSONArray(“weather”).getJSONObject(0).getString(“description”);
-
-             // set all the fields in the activity from the parsed JSON
-             this.Wetter.SetDescription(description);
-             this.Wetter.SetTemperature(temperature);
-             this.Wetter.SetPressure(pressure);
-             this.Wetter.SetHumidity(humidity);
-             } catch (JSONException e) {
-             e.printStackTrace();
-             }
-             }
-
-             private double ConvertTemperatureToFarenheit(double temperature) {
-             return (temperature – 273)* (9/5) + 32;
-             }*/
-
-            private void processJson(String text)  {
             try {
-
-
-                //JSONArray jsonArray = new JSONArray(text);
-                 //for (int i = 0; i < jsonArray.length()-1; i++) {
-                 //JSONObject jsonObject = jsonArray.getJSONObject(0);
-
-                JSONObject jsonObject = new JSONObject(text);
-                /**JSONArray userArray = jsonObject.getJSONArray("user");
-                JSONObject contentObject = userArray.getJSONObject(0);
-                String id = contentObject.getString("id");
-                temperature.setText(id);*/
-            JSONObject weatherObject = jsonObject.getJSONArray("weather").getJSONObject(0);
-                String valueDescription = weatherObject.getString("description");
-                description.setText(valueDescription);
+                JSONObject jsonObject = new JSONObject(result);
+                JSONObject weatherObject = jsonObject.getJSONArray("weather").getJSONObject(0);
                 JSONObject mainObject = jsonObject.getJSONObject("main");
-                double valueTemperature = mainObject.getDouble(TEMPERATURE);
-                temperature.setText(String.valueOf(Math.round(valueTemperature))+" °C");
-                String valueCity = jsonObject.getString(CITY);
-                city.setText(String.valueOf(valueCity));
-                int valueHumidity = mainObject.getInt(HUMIDITY);
-                humidity.setText(String.valueOf(valueHumidity) + "%");
                 JSONObject windObject = jsonObject.getJSONObject("wind");
-                double valueWindspeed = windObject.getDouble(WINDSPEED);
-                windspeed.setText(String.valueOf(Math.round(valueWindspeed)) + " km/h");
                 JSONObject sysObject = jsonObject.getJSONObject("sys");
+
                 String valuesCountry = sysObject.getString("country");
+                String valueDescription = weatherObject.getString(DESCRIPTION);
+                String valueCity = jsonObject.getString(CITY);
+                double valueTemperature = mainObject.getDouble(TEMPERATURE);
+                int valueHumidity = mainObject.getInt(HUMIDITY);
+                double valueWindspeed = windObject.getDouble(WINDSPEED);
+
+                description.setText(valueDescription);
+                temperature.setText(String.valueOf(Math.round(valueTemperature))+" °C");
+                city.setText(String.valueOf(valueCity));
+                humidity.setText(String.valueOf(valueHumidity) + "%");
+                windspeed.setText(String.valueOf(Math.round(valueWindspeed)) + " km/h");
+
                 if (valuesCountry.equals("DE")) {
                     long valueSunrise = sysObject.getLong(SUNRISE);
                     Date date = new Date(valueSunrise * 1000);
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                    //sdf.setTimeZone(TimeZone.getTimeZone("GMT-4"));
                     String formattedDate = sdf.format(date);
                     sunrise.setText(formattedDate + " Uhr");
                 } else {
                     sunrise.setText("--:--");
                 }
+
                 if (valuesCountry.equals("DE")) {
                     long valueSunset = sysObject.getLong(SUNSET);
                     Date date = new Date(valueSunset * 1000);
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                    //sdf.setTimeZone(TimeZone.getTimeZone("GMT-4"));
                     String formattedDate = sdf.format(date);
                     sunset.setText(formattedDate + " Uhr");
                  } else {
                     sunset.setText("--:--");
                 }
-               /** JSONObject windObject = jsonObject.getJSONObject("wind");
-                JSONObject sysObject = jsonObject.getJSONObject("sys");
-                String valueCity = jsonObject.getString(CITY);
-                double valueTemperature = mainObject.getDouble(TEMPERATURE);
-                int valueHumidity = mainObject.getInt(HUMIDITY);
-                double valueWindspeed = jsonObject.getDouble(WINDSPEED);
-                double valueMinTemp = mainObject.getDouble(MINTEMP);
-                double valueMaxTemp = mainObject.getDouble(MAXTEMP);
-                int valueSunrise = sysObject.getInt(SUNRISE);
-                int valueSunset = sysObject.getInt(SUNSET);
 
-
-                city.setText(valueCity);
-                temperature.setText(String.valueOf(valueTemperature));
-                humidity.setText(valueHumidity);
-                windspeed.setText(String.valueOf(valueWindspeed));
-                minTemp.setText(String.valueOf(valueMinTemp));
-                maxTemp.setText(String.valueOf(valueMaxTemp));
-                sunrise.setText(valueSunrise);
-                sunset.setText(valueSunset);
-
-
-
-*/
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-
-
-
-
     }
 
 
@@ -315,7 +221,6 @@ public class Wetter extends AppCompatActivity  {
                 startActivity(i);
                 return true;
         }
-
 
         return super.onOptionsItemSelected(item);
     }

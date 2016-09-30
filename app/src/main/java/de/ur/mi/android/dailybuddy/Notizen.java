@@ -15,42 +15,45 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
-/**
- * Created by Chris on 23.08.2016.
- */
+
+
 public class Notizen extends AppCompatActivity {
 
-    ListView noteList;
-
+    private ListView noteList;
     private ArrayList<String> notes = new ArrayList<String>();
     private NoteAdapter noteAdapter;
     private String noteText = "";
     private NoteDatabase db;
+    private TextView noNotes;
+    private boolean positionAvailable = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notizen);
         setActionBarColor();
-        initDB();
-        initListAdapter();
+        setDB();
+        setNoteAdapter();
         addNewNote(noteText);
+        createNewNote();
         openNote();
         noteList = (ListView) findViewById(R.id.Notizen);
         noteList.setAdapter(noteAdapter);
         removeListItem();
         updateList();
+    }
 
+    private void openNote() {
+        noteList = (ListView) findViewById(R.id.Notizen);
         noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                positionAvailable = true;
                 String fullText = notes.get(position);
                 Intent i = new Intent(Notizen.this, AddNote.class);
                 i.putExtra("fullNote", fullText);
@@ -58,10 +61,6 @@ public class Notizen extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
-
-
     }
 
     private void removeListItem() {
@@ -77,7 +76,7 @@ public class Notizen extends AppCompatActivity {
         });
     }
 
-    private void openNote() {
+    private void createNewNote() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,12 +100,12 @@ public class Notizen extends AppCompatActivity {
         super.onDestroy();
     }
 
-    private void initDB() {
+    private void setDB() {
         db = new NoteDatabase(this);
         db.open();
     }
 
-    private void initListAdapter() {
+    private void setNoteAdapter() {
         ListView list = (ListView) findViewById(R.id.Notizen);
         noteAdapter = new NoteAdapter(this, notes);
         list.setAdapter(noteAdapter);
@@ -116,44 +115,35 @@ public class Notizen extends AppCompatActivity {
     private void updateList() {
         notes.clear();
         notes.addAll(db.getAllNotes());
+        noNotes = (TextView) findViewById(R.id.notes_not_existing);
+        ListView list = (ListView) findViewById(R.id.Notizen);
+        list.setEmptyView(noNotes);
         noteAdapter.notifyDataSetChanged();
+
     }
 
     private void addNewNote(String noteText) {
         Bundle bundle = getIntent().getExtras();
-
-            if (getIntent().getStringExtra("TextNote") != null && getIntent().getStringExtra("position") != null) {
+            if (getIntent().getStringExtra("TextNote") != null) {
                 noteText = bundle.getString("TextNote");
-                int position = bundle.getInt("position");
-                removeNote(position);
+                if (positionAvailable) {
+                    int position = bundle.getInt("position");
+                    removeNote(position);
+                }
+                positionAvailable = false;
                 addNote(noteText);
-
-            } else if (getIntent().getStringExtra("TextNote") != null) {
-            noteText = bundle.getString("TextNote");
-            addNote(noteText);
-
             }
-
-            //String newNote = new String(noteText);
-
-            //db.insertNote(noteText);
-            //updateList();
-
     }
 
     private void removeNote(int position) {
-            db.removeNote(notes.get(position));
+        db.removeNote(notes.get(position));
         notes.remove(notes.get(position));
         noteAdapter.notifyDataSetChanged();
 
     }
     private void addNote(String noteText) {
-
         db.insertNote(noteText);
         updateList();
-            //notes.add(title);
-            //noteAdapter.notifyDataSetChanged();
-
     }
 
     @Override
@@ -202,7 +192,6 @@ public class Notizen extends AppCompatActivity {
                 startActivity(i);
                 return true;
         }
-
 
         return super.onOptionsItemSelected(item);
     }

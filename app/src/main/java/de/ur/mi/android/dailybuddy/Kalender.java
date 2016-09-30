@@ -12,9 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-/**
- * Created by Chris on 23.08.2016.
- */
+
 public class Kalender extends AppCompatActivity {
 
     @Override
@@ -22,8 +20,6 @@ public class Kalender extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.kalender);
         setActionBarColor();
-
-
     }
 
     private void setActionBarColor() {
@@ -45,7 +41,6 @@ public class Kalender extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
 
         switch (id){
             case R.id.home:
@@ -78,7 +73,6 @@ public class Kalender extends AppCompatActivity {
                 startActivity(i);
                 return true;
         }
-
 
         return super.onOptionsItemSelected(item);
     }
