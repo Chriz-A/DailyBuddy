@@ -73,6 +73,7 @@ public class Wetter extends AppCompatActivity  {
             public void onClick(View v){
                 address = place.getText().toString().toLowerCase().trim();
                 new WetterTask().execute(ADDRESS_START + address + ADDRESS_END);
+                place.setText("");
             }
         });
     }
